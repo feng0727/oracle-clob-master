@@ -129,7 +129,6 @@
              <!--   <if test="CREATE_TIME!= null and CREATE_TIME != ''">
                     CREATE_TIME=#{item.createTime},
                 </if>-->
-
             </set>
             where POOL_PK_NO = #{item.poolPkNo}
         </foreach>
@@ -166,5 +165,25 @@
     <!--SELECT * FROM(SELECT A.*, ROWNUM RN from (SELECT ID,NAME,SUM( CASE WHEN NAME like '%河南%' THEN 1 ELSE 0 END + CASE WHEN NAME like '%新能源%' THEN 1 ELSE 0 END + CASE WHEN NAME like '%方城%' THEN 1 ELSE 0 END )AS MATCHDGREE FROM POLICY_ANA GROUP BY NAME,ID ORDER BY MATCHDGREE DESC)  A WHERE ROWNUM <= 10)  WHERE RN >= 1 -->
     <!--分页查询格式2-->
     <!--SELECT * FROM(SELECT A.*, ROWNUM RN from (SELECT ID,NAME,SUM( CASE WHEN NAME like '%河南%' THEN 1 ELSE 0 END + CASE WHEN NAME like '%新能源%' THEN 1 ELSE 0 END + CASE WHEN NAME like '%方城%' THEN 1 ELSE 0 END )AS MATCHDGREE FROM POLICY_ANA GROUP BY NAME,ID ORDER BY MATCHDGREE DESC)  A) WHERE RN BETWEEN 1 AND 10 -->
+    <select id="selectClobById" resultType="com.gblfy.entity.Policy">
+        select ID,NAME,DESCRIBE,MATCHDGREE,NEW_MATCHDGREE  FROM POLICY_ANA
+        where ID in
+        <foreach collection="idsData" index="index" item="val" separator="," open="(" close=")">
+            #{val}
+        </foreach>
+    </select>
+
+    <update id="matchDgreeBySel" parameterType="com.gblfy.entity.Policy">
+        <foreach collection="idList" item="item" open="begin" close=";end;" separator=";">
+            update POLICY_ANA
+            <set>
+                <if test="item.matchdgree!=null and item.matchdgree!=''">
+                    NEW_MATCHDGREE=MATCHDGREE+100
+                </if>
+            </set>
+            where ID = #{item.id}
+        </foreach>
+    </update>
+
 
 </mapper>

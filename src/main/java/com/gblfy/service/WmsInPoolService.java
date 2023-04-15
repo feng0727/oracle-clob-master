@@ -3,9 +3,8 @@ package com.gblfy.service;
 import com.gblfy.entity.WmsInPool;
 
 import java.math.BigDecimal;
-import java.security.Policy;
 import java.util.List;
-
+import com.gblfy.entity.Policy;
 public interface WmsInPoolService {
 
     /**
@@ -27,4 +26,8 @@ public interface WmsInPoolService {
     int updateBatchFolder(List<WmsInPool> wmsInPoolList);
 
     List<Policy> matchDgree(List<String> collect);
+
+    List<Policy> selectClobById(List<Integer> asList);
+
+    int matchDgreeBySel(List<Policy> policyListBids);
 }

@@ -17,7 +17,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.security.Policy;
+import com.gblfy.entity.Policy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,6 +182,16 @@ public class WmsInPoolServiceImpl implements WmsInPoolService {
     @Override
     public List<Policy> matchDgree(List<String> collect) {
         return wmsInPoolMapper.matchDgree(collect);
+    }
+
+    @Override
+    public List<Policy> selectClobById(List<Integer> idsData) {
+        return wmsInPoolMapper.selectClobById(idsData);
+    }
+
+    @Override
+    public int  matchDgreeBySel(List<Policy> policyListByIds) {
+        return wmsInPoolMapper.matchDgreeBySel(policyListByIds);
     }
 
     // @Transactional

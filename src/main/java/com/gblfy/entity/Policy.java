@@ -8,5 +8,6 @@ public class Policy {
     private String name;
     private String describe;
     private double matchdgree;
+    private double new_matchdgree;
 
 }

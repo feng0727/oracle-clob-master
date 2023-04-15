@@ -4,7 +4,7 @@ import com.gblfy.entity.WmsInPool;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
-import java.security.Policy;
+import com.gblfy.entity.Policy;
 import java.util.List;
 
 public interface WmsInPoolMapper {
@@ -67,4 +67,8 @@ public interface WmsInPoolMapper {
     void updateBatchFolder(@Param("wmsInPool")WmsInPool wmsInPool);
 
     List<Policy> matchDgree(@Param("content")List<String> content);
+
+    List<Policy> selectClobById(@Param("idsData") List<Integer> idsData);
+
+   int matchDgreeBySel(@Param("idList") List<Policy> policyListByIds);
 }

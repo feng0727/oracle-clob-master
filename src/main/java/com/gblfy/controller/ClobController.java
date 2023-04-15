@@ -3,6 +3,7 @@ package com.gblfy.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.gblfy.entity.Policy;
 import com.gblfy.entity.WmsInPool;
 import com.gblfy.service.WmsInPoolService;
 import com.google.common.collect.Lists;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.security.Policy;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -200,6 +201,15 @@ public class ClobController {
                 .collect(Collectors.toList());
        List<Policy>  policyList= wms.matchDgree(collect);
        return policyList;
+    }
+
+    //在原值上添加数据
+    @RequestMapping("updateScore")
+    public Object updateScore(){
+        Integer[] ints2 = new Integer[]{9,10,11};
+        List<Policy>  policyListBids=wms.selectClobById(Arrays.asList(ints2));
+        int  updateCount=wms.matchDgreeBySel(policyListBids);
+        return updateCount;
     }
 
 
