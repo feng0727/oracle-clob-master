@@ -1,0 +1,16 @@
+#
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:ORCL
+    username: orcl
+    password: FENGbing226688
+    filters: wall,mergeStat
+
+#
+mybatis.mapper-locations: classpath:/mapper/**/*.xml
+
+#
+logging:
+  level:
+    com.gblfy.mapper: trace
